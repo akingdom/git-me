@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List GitHub Gists and Repositories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Your GitHub Gists and Repositories as Markdown</h1>
+        <p>Enter your GitHub username to easily, quickly and conveniently list your projects. Then, paste the markdown-friendly results into a README.md file or similar to showcase on GitHub and beyond.</p>
+        <div class="input-area">
+            <label for="username">GitHub Username:</label>
+            <input type="text" id="username" placeholder="Enter your username" autofocus>
+            <button id="fetchButton">Fetch</button>
+        </div>
+        <textarea id="output" class="output-area" readonly placeholder="A list of your projects will appear here"></textarea>
+        <button id="copyButton" class="copy-button">Copy to Clipboard</button>
+    </div>
+    <script src="commons-notify.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
