@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('container');
     const fetchButton = document.getElementById('fetchButton');
     const usernameInput = document.getElementById('username');
     const outputArea = document.getElementById('output');
     const copyButton = document.getElementById('copyButton');
 
+    // Set initial focus on the username input field
     usernameInput.focus();
 
     fetchButton.addEventListener('click', () => {
@@ -93,15 +95,24 @@ async function fetchAndBuild(GITHUB_USERNAME) {
 
 // Process the fetched data into markdown code
 function rebuildList(username, gists, repos) {
+    // ---- NEW: Check if user wants to include forks ----
+    const includeForks = document.getElementById('includeForks').checked;
+    
+    // Filter repositories based on the checkbox
+    const displayRepos = includeForks 
+        ? repos 
+        : repos.filter(repo => !repo.fork);
+    // -------------------------------------------------
+
     const CC_by = "Menu listing by Andrew Kingdom's [Git Me](https://akingdom.github.io/git-me/)";
     const title = `${username}’s GitHub Gists and Repositories`;
     const explanation = `This is a list of my articles, projects, etc.`;
     let markdownOutput = `## ${title}\n\n*${explanation}*\n\n### Repositories\n`;
 
-    if (!repos || repos.length === 0) {
+    if (!displayRepos || displayRepos.length === 0) {
         markdownOutput += '- No repositories were found';
     } else {
-        repos.forEach(repo => {
+        displayRepos.forEach(repo => {
             markdownOutput += `- [${repo.name}](${repo.html_url})\n`;
         });
     }
